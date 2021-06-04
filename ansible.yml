@@ -1,0 +1,22 @@
+---
+- name:  sample book
+  hosts: ansible_client
+  remote_user: root
+  become: true
+  tasks: 
+       - name:  install httpd
+         yum: 
+           name:  httpd
+           state: latest
+       - name:  run httpd
+         service: 
+               name:  httpd
+               state: started
+       #- name:  create content
+        # copy:
+         #    content: "Congrats"
+          #   dest: /var/www/html/index.html
+       - name: Copy Home Page
+         template:
+             src: index.j2
+             dest: /var/www/html/index.html
